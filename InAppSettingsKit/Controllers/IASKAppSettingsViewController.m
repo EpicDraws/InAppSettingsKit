@@ -202,13 +202,14 @@ CGRect IASKCGRectSwap(CGRect rect);
 		self.title = NSLocalizedString(@"Settings", @"");
 	}
 	
-	if ([self.settingsStore isKindOfClass:[IASKSettingsStoreUserDefaults class]]) {
+	if ([self.settingsStore respondsToSelector:@selector(defaults)]) {
 		NSNotificationCenter *dc = NSNotificationCenter.defaultCenter;
 		IASKSettingsStoreUserDefaults *udSettingsStore = (id)self.settingsStore;
 		[dc addObserver:self selector:@selector(userDefaultsDidChange) name:NSUserDefaultsDidChangeNotification object:udSettingsStore.defaults];
 		[dc addObserver:self selector:@selector(didChangeSettingViaIASK:) name:kIASKAppSettingChanged object:nil];
 		[self userDefaultsDidChange]; // force update in case of changes while we were hidden
 	}
+    
 	[super viewWillAppear:animated];
 }
 
