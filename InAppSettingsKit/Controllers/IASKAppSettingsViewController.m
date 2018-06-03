@@ -433,7 +433,7 @@ CGRect IASKCGRectSwap(CGRect rect);
 								  UIContentSizeCategoryMedium: @(44),
 								  UIContentSizeCategoryLarge: @(44),
 								  UIContentSizeCategoryExtraLarge: @(47)};
-	 return (CGFloat)[rowHeights[UIApplication.sharedApplication.preferredContentSizeCategory] doubleValue] ? : 51;
+	 return (int)[rowHeights[UIApplication.sharedApplication.preferredContentSizeCategory] doubleValue] ? : 51;
 	);
 	return 44;
 }
@@ -447,7 +447,7 @@ CGRect IASKCGRectSwap(CGRect rect);
 }
 
 - (UIView *)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
-	if ([self.delegate respondsToSelector:@selector(settingsViewController:tableView:viewForHeaderForSection:)]) {
+	if (self.delegate && [self.delegate respondsToSelector:@selector(settingsViewController:tableView:viewForHeaderForSection:)]) {
 		return [self.delegate settingsViewController:self tableView:tableView viewForHeaderForSection:section];
 	} else {
 		return nil;
